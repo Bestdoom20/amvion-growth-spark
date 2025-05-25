@@ -38,7 +38,8 @@ const AmvionLanding = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-amvion-green/10 via-transparent to-amvion-purple/10"></div>
         <div className="container mx-auto px-6 text-center relative z-10">
           <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-amvion-green to-amvion-purple bg-clip-text text-transparent animate-gradient-shift bg-[length:200%_200%]">
-            AMVION
+            Scale Your Landscaping Company<br />
+            <span className="text-5xl md:text-7xl">and Outbook Everyone</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
             AI-powered lead generation and client acquisition for landscaping businesses. 
@@ -54,6 +55,15 @@ const AmvionLanding = () => {
               <ArrowDown className="ml-2 h-5 w-5" />
             </Button>
           </div>
+          
+          {/* Gradient Line Below Button */}
+          <div 
+            data-animate
+            id="hero-gradient-line"
+            className={`mt-8 mx-auto w-64 h-1 bg-gradient-to-r from-transparent via-amvion-green to-amvion-purple transition-all duration-1000 delay-500 ${
+              isVisible['hero-gradient-line'] ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
+            }`}
+          ></div>
         </div>
       </section>
 
