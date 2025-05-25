@@ -1,45 +1,40 @@
-
 import React, { useEffect, useState } from 'react';
 import { ArrowDown, Calendar, Youtube } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
 const AmvionLanding = () => {
-  const [isVisible, setIsVisible] = useState<{ [key: string]: boolean }>({});
-
+  const [isVisible, setIsVisible] = useState<{
+    [key: string]: boolean;
+  }>({});
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(prev => ({
-              ...prev,
-              [entry.target.id]: true
-            }));
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setIsVisible(prev => ({
+            ...prev,
+            [entry.target.id]: true
+          }));
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
     const elements = document.querySelectorAll('[data-animate]');
     elements.forEach(el => observer.observe(el));
-
     return () => observer.disconnect();
   }, []);
-
   const scrollToSection = (sectionId: string) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById(sectionId)?.scrollIntoView({
+      behavior: 'smooth'
+    });
   };
-
-  return (
-    <div className="min-h-screen bg-amvion-dark-bg text-white overflow-x-hidden">
+  return <div className="min-h-screen bg-amvion-dark-bg text-white overflow-x-hidden">
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative">
         <div className="absolute inset-0 bg-gradient-to-br from-amvion-green/10 via-transparent to-amvion-purple/10"></div>
         <div className="container mx-auto px-6 text-center relative z-10">
           <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-amvion-green to-amvion-purple bg-clip-text text-transparent animate-gradient-shift bg-[length:200%_200%]">
             Scale Your Landscaping Company<br />
-            <span className="text-5xl md:text-7xl">and Outbook Everyone</span>
+            <span className="text-5xl md:text-7xl text-amvion-green">and Outbook Everyone</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
             AI-powered lead generation and client acquisition for landscaping businesses. 
@@ -47,47 +42,26 @@ const AmvionLanding = () => {
             while you focus on what you do best.
           </p>
           <div className="mt-12">
-            <Button 
-              onClick={() => scrollToSection('how-we-do-it')}
-              className="bg-gradient-to-r from-amvion-green to-amvion-purple hover:from-amvion-green/80 hover:to-amvion-purple/80 text-white px-8 py-4 text-lg rounded-full transition-all duration-300 transform hover:scale-105"
-            >
+            <Button onClick={() => scrollToSection('how-we-do-it')} className="bg-gradient-to-r from-amvion-green to-amvion-purple hover:from-amvion-green/80 hover:to-amvion-purple/80 text-white px-8 py-4 text-lg rounded-full transition-all duration-300 transform hover:scale-105">
               See How We Do It
               <ArrowDown className="ml-2 h-5 w-5" />
             </Button>
           </div>
           
           {/* Gradient Line Below Button */}
-          <div 
-            data-animate
-            id="hero-gradient-line"
-            className={`mt-8 mx-auto w-64 h-1 bg-gradient-to-r from-transparent via-amvion-green to-amvion-purple transition-all duration-1000 delay-500 ${
-              isVisible['hero-gradient-line'] ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
-            }`}
-          ></div>
+          <div data-animate id="hero-gradient-line" className={`mt-8 mx-auto w-64 h-1 bg-gradient-to-r from-transparent via-amvion-green to-amvion-purple transition-all duration-1000 delay-500 ${isVisible['hero-gradient-line'] ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`}></div>
         </div>
       </section>
 
       {/* How We Do It Section */}
       <section id="how-we-do-it" className="py-20 relative">
         <div className="container mx-auto px-6 text-center">
-          <h2 
-            data-animate 
-            id="how-we-do-it-title"
-            className={`text-4xl md:text-6xl font-bold mb-12 bg-gradient-to-r from-amvion-green to-amvion-purple bg-clip-text text-transparent transition-all duration-700 ${
-              isVisible['how-we-do-it-title'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'
-            }`}
-          >
+          <h2 data-animate id="how-we-do-it-title" className={`text-4xl md:text-6xl font-bold mb-12 bg-gradient-to-r from-amvion-green to-amvion-purple bg-clip-text text-transparent transition-all duration-700 ${isVisible['how-we-do-it-title'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
             How We Transform Your Business
           </h2>
           
           {/* YouTube Video Placeholder with Glow Effect */}
-          <div 
-            data-animate
-            id="video-container"
-            className={`relative max-w-4xl mx-auto mb-12 transition-all duration-700 delay-300 ${
-              isVisible['video-container'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'
-            }`}
-          >
+          <div data-animate id="video-container" className={`relative max-w-4xl mx-auto mb-12 transition-all duration-700 delay-300 ${isVisible['video-container'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
             <div className="relative bg-gray-900 rounded-2xl p-8 animate-glow">
               <div className="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl flex items-center justify-center">
                 <Youtube className="h-20 w-20 text-amvion-green" />
@@ -96,45 +70,24 @@ const AmvionLanding = () => {
             </div>
           </div>
 
-          <Button 
-            onClick={() => scrollToSection('calendly-section')}
-            className="bg-gradient-to-r from-amvion-green to-amvion-purple hover:from-amvion-green/80 hover:to-amvion-purple/80 text-white px-12 py-4 text-xl rounded-full transition-all duration-300 transform hover:scale-105 animate-glow"
-          >
+          <Button onClick={() => scrollToSection('calendly-section')} className="bg-gradient-to-r from-amvion-green to-amvion-purple hover:from-amvion-green/80 hover:to-amvion-purple/80 text-white px-12 py-4 text-xl rounded-full transition-all duration-300 transform hover:scale-105 animate-glow">
             Book Your Growth Call Now
           </Button>
         </div>
       </section>
 
       {/* Animated Divider */}
-      <div 
-        data-animate
-        id="divider-1"
-        className={`h-1 bg-gradient-to-r from-transparent via-amvion-green to-amvion-purple transition-all duration-1000 ${
-          isVisible['divider-1'] ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
-        }`}
-      ></div>
+      <div data-animate id="divider-1" className={`h-1 bg-gradient-to-r from-transparent via-amvion-green to-amvion-purple transition-all duration-1000 ${isVisible['divider-1'] ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`}></div>
 
       {/* Visual Explainer Section */}
       <section className="py-20">
         <div className="container mx-auto px-6">
-          <h2 
-            data-animate
-            id="explainer-title"
-            className={`text-4xl md:text-5xl font-bold text-center mb-20 bg-gradient-to-r from-amvion-green to-amvion-purple bg-clip-text text-transparent transition-all duration-700 ${
-              isVisible['explainer-title'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'
-            }`}
-          >
+          <h2 data-animate id="explainer-title" className={`text-4xl md:text-5xl font-bold text-center mb-20 bg-gradient-to-r from-amvion-green to-amvion-purple bg-clip-text text-transparent transition-all duration-700 ${isVisible['explainer-title'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
             The Amvion Advantage
           </h2>
 
           {/* Block 1 - Left Image, Right Text */}
-          <div 
-            data-animate
-            id="block-1"
-            className={`flex flex-col md:flex-row items-center mb-20 transition-all duration-700 delay-200 ${
-              isVisible['block-1'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'
-            }`}
-          >
+          <div data-animate id="block-1" className={`flex flex-col md:flex-row items-center mb-20 transition-all duration-700 delay-200 ${isVisible['block-1'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
             <div className="md:w-1/2 mb-8 md:mb-0 md:pr-12">
               <div className="w-full h-64 bg-gradient-to-br from-amvion-green/20 to-amvion-purple/20 rounded-2xl flex items-center justify-center">
                 <span className="text-2xl text-gray-300">AI Lead Generation</span>
@@ -151,13 +104,7 @@ const AmvionLanding = () => {
           </div>
 
           {/* Block 2 - Right Image, Left Text */}
-          <div 
-            data-animate
-            id="block-2"
-            className={`flex flex-col md:flex-row-reverse items-center mb-20 transition-all duration-700 delay-400 ${
-              isVisible['block-2'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'
-            }`}
-          >
+          <div data-animate id="block-2" className={`flex flex-col md:flex-row-reverse items-center mb-20 transition-all duration-700 delay-400 ${isVisible['block-2'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
             <div className="md:w-1/2 mb-8 md:mb-0 md:pl-12">
               <div className="w-full h-64 bg-gradient-to-br from-amvion-purple/20 to-amvion-green/20 rounded-2xl flex items-center justify-center">
                 <span className="text-2xl text-gray-300">Automated Outreach</span>
@@ -174,13 +121,7 @@ const AmvionLanding = () => {
           </div>
 
           {/* Block 3 - Left Image, Right Text */}
-          <div 
-            data-animate
-            id="block-3"
-            className={`flex flex-col md:flex-row items-center mb-20 transition-all duration-700 delay-600 ${
-              isVisible['block-3'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'
-            }`}
-          >
+          <div data-animate id="block-3" className={`flex flex-col md:flex-row items-center mb-20 transition-all duration-700 delay-600 ${isVisible['block-3'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
             <div className="md:w-1/2 mb-8 md:mb-0 md:pr-12">
               <div className="w-full h-64 bg-gradient-to-br from-amvion-green/20 to-amvion-purple/20 rounded-2xl flex items-center justify-center">
                 <Calendar className="h-16 w-16 text-amvion-green" />
@@ -197,13 +138,7 @@ const AmvionLanding = () => {
           </div>
 
           {/* Block 4 - Right Image, Left Text */}
-          <div 
-            data-animate
-            id="block-4"
-            className={`flex flex-col md:flex-row-reverse items-center mb-20 transition-all duration-700 delay-800 ${
-              isVisible['block-4'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'
-            }`}
-          >
+          <div data-animate id="block-4" className={`flex flex-col md:flex-row-reverse items-center mb-20 transition-all duration-700 delay-800 ${isVisible['block-4'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
             <div className="md:w-1/2 mb-8 md:mb-0 md:pl-12">
               <div className="w-full h-64 bg-gradient-to-br from-amvion-purple/20 to-amvion-green/20 rounded-2xl flex items-center justify-center">
                 <span className="text-2xl text-gray-300">Business Growth</span>
@@ -224,22 +159,10 @@ const AmvionLanding = () => {
       {/* Puzzle Piece Connection Section */}
       <section className="py-20 bg-gradient-to-br from-amvion-green/5 to-amvion-purple/5">
         <div className="container mx-auto px-6 text-center">
-          <h2 
-            data-animate
-            id="puzzle-title"
-            className={`text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-amvion-green to-amvion-purple bg-clip-text text-transparent transition-all duration-700 ${
-              isVisible['puzzle-title'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'
-            }`}
-          >
+          <h2 data-animate id="puzzle-title" className={`text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-amvion-green to-amvion-purple bg-clip-text text-transparent transition-all duration-700 ${isVisible['puzzle-title'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
             The Missing Piece to Your Success
           </h2>
-          <div 
-            data-animate
-            id="puzzle-content"
-            className={`max-w-4xl mx-auto transition-all duration-700 delay-300 ${
-              isVisible['puzzle-content'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'
-            }`}
-          >
+          <div data-animate id="puzzle-content" className={`max-w-4xl mx-auto transition-all duration-700 delay-300 ${isVisible['puzzle-content'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
             <p className="text-xl md:text-2xl text-gray-300 leading-relaxed mb-8">
               Amvion integrates seamlessly into your landscaping business like the perfect puzzle piece. 
               <span className="text-amvion-green font-semibold"> Fully automated. Completely hassle-free.</span>
@@ -259,44 +182,20 @@ const AmvionLanding = () => {
       </section>
 
       {/* Second Animated Divider */}
-      <div 
-        data-animate
-        id="divider-2"
-        className={`h-1 bg-gradient-to-r from-transparent via-amvion-purple to-amvion-green transition-all duration-1000 ${
-          isVisible['divider-2'] ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
-        }`}
-      ></div>
+      <div data-animate id="divider-2" className={`h-1 bg-gradient-to-r from-transparent via-amvion-purple to-amvion-green transition-all duration-1000 ${isVisible['divider-2'] ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`}></div>
 
       {/* Calendly Section */}
       <section id="calendly-section" className="py-20">
         <div className="container mx-auto px-6 text-center">
-          <h2 
-            data-animate
-            id="calendly-title"
-            className={`text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-amvion-green to-amvion-purple bg-clip-text text-transparent transition-all duration-700 ${
-              isVisible['calendly-title'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'
-            }`}
-          >
+          <h2 data-animate id="calendly-title" className={`text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-amvion-green to-amvion-purple bg-clip-text text-transparent transition-all duration-700 ${isVisible['calendly-title'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
             Ready to Scale?
           </h2>
-          <p 
-            data-animate
-            id="calendly-subtitle"
-            className={`text-xl text-gray-300 mb-12 transition-all duration-700 delay-200 ${
-              isVisible['calendly-subtitle'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'
-            }`}
-          >
+          <p data-animate id="calendly-subtitle" className={`text-xl text-gray-300 mb-12 transition-all duration-700 delay-200 ${isVisible['calendly-subtitle'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
             Book a 15-minute call to discover how Amvion can transform your landscaping business
           </p>
           
           {/* Calendly Embed Placeholder with Glow Effect */}
-          <div 
-            data-animate
-            id="calendly-container"
-            className={`relative max-w-4xl mx-auto transition-all duration-700 delay-400 ${
-              isVisible['calendly-container'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'
-            }`}
-          >
+          <div data-animate id="calendly-container" className={`relative max-w-4xl mx-auto transition-all duration-700 delay-400 ${isVisible['calendly-container'] ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'}`}>
             <div className="relative bg-gray-900 rounded-2xl p-8 animate-glow">
               <div className="aspect-[4/3] bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl flex items-center justify-center">
                 <div className="text-center">
@@ -320,8 +219,6 @@ const AmvionLanding = () => {
           </p>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default AmvionLanding;
